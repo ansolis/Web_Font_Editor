@@ -62,11 +62,6 @@ function drawBox(x, y, w, h) {
 
 // Button click event handler
 function save() {
-
-    // resizeCanvas(1000);
-
-    // resizeCanvas(2000);
-
     // Show an example of the text area contents
     document.getElementById("text").value = "Example: {0x18,0xC0,0x21,0x40,0x22,0x40,0x24,0x40,0x18,0x40,0x00,0x00}";
 
@@ -82,6 +77,10 @@ function save() {
     }
 
     // Draw the font on the canvas
+    drawCharacter(hexValues);
+}
+
+function drawCharacter(hexValues) {
     for (var row = 0; row < font_height; row++) {
         for (var col = 0; col < font_width; col++) {
             var byte_offset = (col * 2) + Math.trunc(row / 8);
@@ -92,7 +91,6 @@ function save() {
             } else {
                 drawBox(col * 20, 100 + row * 20, 20, 20);
             }
-
         }
     }
 }
@@ -106,7 +104,7 @@ function isStartsWith0x(str) {
     return str.startsWith("0x") || str.startsWith("0X");
 }
 
-// // Is the character a decimal digit (e.g. 0, 1, ... 9)
+// Is the character a decimal digit (e.g. 0, 1, ... 9)
 // function isDecimalDigitChar(str) {
 //     return str >= "0" && str <= "9";
 // }
@@ -163,15 +161,59 @@ function getHexValues() {
     return hexValues;
 }
 
-// Function to resize the canvas based on the size of the top div
-function resizeCanvas(divWidth) {
-    // var width = topDiv.clientWidth; // Get the width of the top div
-    // canvas.width = width; // Set the canvas width to match the top div
-    topDiv.width = divWidth;
-}
 
 // Event listener for the save button
 document.getElementById("save").addEventListener("click", save);
 
 // Event listener for the text area
 //document.getElementById("text").addEventListener("input", save);
+
+
+// Function to resize canvas to match its display size
+function resizeCanvasToDisplaySize(canvas) {
+    const rect = canvas.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+
+    // Check if the canvas size needs to change
+    if (canvas.width !== width || canvas.height !== height) {
+        const context = canvas.getContext('2d');
+
+        // Get the current image data to preserve drawings
+        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+
+        // Set the new canvas size
+        canvas.width = width;
+        canvas.height = height;
+
+        // Restore the drawing
+        context.putImageData(imageData, 0, 0);
+
+        return true;
+    }
+    return false;
+}
+
+// Get canvas elements
+const canvas1 = document.getElementById('canvas');
+const canvas2 = document.getElementById('canvas2');
+
+// Initial resize
+resizeCanvasToDisplaySize(canvas1);
+resizeCanvasToDisplaySize(canvas2);
+
+// Handle window resize
+window.addEventListener('resize', () => {
+    resizeCanvasToDisplaySize(canvas1);
+    resizeCanvasToDisplaySize(canvas2);
+    // Redraw canvas content here if necessary
+});
+
+// Placeholder for additional font editor functionalities
+// For example, handling drawing on the canvas, saving fonts, etc.
+
+// Example: Drawing context retrieval
+const ctx1 = canvas1.getContext('2d');
+const ctx2 = canvas2.getContext('2d');
+
+// You can add event listeners and functions to handle drawing here

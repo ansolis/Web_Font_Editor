@@ -1,15 +1,22 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <title>Font Editor</title>
-    </head>
-    <body>
-        <div id="top" style="overflow-x: auto; width: 100%;">
-            <canvas id="canvas" width="1000" height="500"></canvas>
-        </div>
-        <div id="bottom">
-            <textarea id="text" rows="10" cols="50"></textarea>
+<head>
+    <title>Font Editor</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <div id="top">
+        <canvas id="canvas"></canvas>
+    </div>
+    <div id="bottom">
+        <div id="bottom-left">
+            <textarea id="text"></textarea>
             <button id="save">Save</button>
         </div>
-    </body>
+        <div id="bottom-right">
+            <canvas id="canvas2"></canvas>
+        </div>
+    </div>
     <script src="font_edit.js"></script>
+</body>
 </html>

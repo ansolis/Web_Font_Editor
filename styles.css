@@ -1,0 +1,68 @@
+/* Reset default margins and paddings */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+/* Container for the entire page */
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Top section styling */
+#top {
+    flex: 1 1 50%;
+    min-height: 0; /* Allows the flex item to shrink below content size */
+    overflow: hidden;
+}
+
+/* Bottom section styling */
+#bottom {
+    display: flex;
+    flex: 1 1 50%;
+    min-height: 0; /* Allows the flex item to shrink below content size */
+}
+
+/* Left and right splits */
+#bottom-left,
+#bottom-right {
+    flex: 1;
+    padding: 10px;
+    box-sizing: border-box;
+    min-width: 0; /* Prevents content from forcing flex item to grow */
+    min-height: 0; /* Allows shrinking */
+    overflow: auto;
+}
+
+/* Bottom-left uses flex column */
+#bottom-left {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Canvas styling */
+canvas {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ccc;
+    display: block;
+}
+
+/* Textarea styling */
+#text {
+    flex: 1 1 auto;
+    width: 100%;
+    box-sizing: border-box;
+    resize: none;
+}
+
+/* Button styling */
+#save {
+    flex: 0 0 auto;
+    width: 100%;
+    height: 40px;
+    box-sizing: border-box;
+    margin-top: 10px;
+}
